@@ -1,7 +1,10 @@
 // Package tempconv performs Celsius and Fahrenheit conversions.
 package tempconv
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+)
 
 type Celsius float64
 type Fahrenheit float64
@@ -32,4 +35,10 @@ func (f *celsiusFlag) Set(s string) error {
 		return nil
 	}
 	return fmt.Errorf("invalid temperate %q", s)
+}
+
+func CelsiusFlag(name string, value Celsius, usage string) *Celsius {
+	f := celsiusFlag{value}
+	flag.CommandLine.Var(&f, name, usage)
+	return &f.Celsius
 }
