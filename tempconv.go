@@ -33,6 +33,9 @@ func (f *celsiusFlag) Set(s string) error {
 	case "F", "°F":
 		f.Celsius = FToC(Fahrenheit(value))
 		return nil
+	case "K", "°K":
+		f.Celsius = KToC(Kelvin(value))
+		return nil
 	}
 	return fmt.Errorf("invalid temperate %q", s)
 }
